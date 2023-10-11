@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -43,6 +43,9 @@ class HomeController extends Controller
     {
         // 連線到資料庫
         DB::connection('mysql');
+        $randomNumber = rand(1, 100);
+        $t = strtotime('+0 hours');
+        DB::insert('insert into chart (value, time) values (?, ?)', [$randomNumber, date('Y-m-d H:i:s', $t)]);
 
         $data = [
             $t = strtotime('+8 hours'),
